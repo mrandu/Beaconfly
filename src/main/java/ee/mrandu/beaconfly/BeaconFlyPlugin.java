@@ -126,7 +126,7 @@ public class BeaconFlyPlugin extends JavaPlugin {
                 : "§dFlight mode disabled");
         player.playSound(
                 player.getLocation(),
-                Sound.BLOCK_AMETHYST_BLOCK_PLACE,
+                Sound.BLOCK_NOTE_BLOCK_CHIME,
                 1.0f,
                 0.6f
         );
