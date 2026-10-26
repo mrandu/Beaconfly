@@ -21,7 +21,19 @@ BeaconFly is a Paper server plugin that lets players fly while they have Haste I
 
 Only players can use these commands. There is no permission restriction, so any player can change their own setting. Player opt-outs are kept in memory and reset when the plugin or server restarts; BeaconFly is enabled by default.
 
-Flight eligibility is checked every five seconds. Creative and Spectator players are left unchanged. Flight state changes are announced in chat and play the amethyst block placement sound.
+Flight eligibility is checked every five seconds. Creative and Spectator players are left unchanged. Flight state changes are announced in chat and play the configured sound.
+
+## Configuration
+
+The generated `plugins/BeaconFly/config.yml` controls the flight sound:
+
+```yaml
+flight-sound:
+	sound: minecraft:block.note_block.chime
+	pitch: 0.6
+```
+
+`sound` is a namespaced Minecraft sound key, and `pitch` must be between `0.5` and `2.0`. Invalid values fall back to the defaults. Restart or reload the plugin after editing the config.
 
 ## Build
 

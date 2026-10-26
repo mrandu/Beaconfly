@@ -7,6 +7,8 @@ import java.util.Set;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -16,9 +18,13 @@ public class BeaconFlyPlugin extends JavaPlugin {
 
     private final Set<UUID> disabledPlayers = new HashSet<>();
     private final Set<UUID> flightEnabled = new HashSet<>();
+    private Sound flightSound = Sound.BLOCK_NOTE_BLOCK_CHIME;
+    private float flightSoundPitch = 0.6f;
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
+        loadSoundSettings();
 
         getCommand("beaconfly").setExecutor(
                 new BeaconFlyCommand(this)
@@ -46,6 +52,35 @@ public class BeaconFlyPlugin extends JavaPlugin {
         }
 
         getLogger().info("BeaconFly disabled");
+    }
+
+    private void loadSoundSettings() {
+        String soundName = getConfig().getString(
+                "flight-sound.sound",
+            "minecraft:block.note_block.chime"
+        );
+        NamespacedKey soundKey = NamespacedKey.fromString(soundName.trim());
+        Sound configuredSound = soundKey == null
+            ? null
+            : Registry.SOUNDS.get(soundKey);
+        if (configuredSound == null) {
+            getLogger().warning(
+                    "Invalid flight-sound.sound '" + soundName
+                    + "'; using minecraft:block.note_block.chime"
+            );
+            flightSound = Sound.BLOCK_NOTE_BLOCK_CHIME;
+        } else {
+            flightSound = configuredSound;
+        }
+
+        double pitch = getConfig().getDouble("flight-sound.pitch", 0.6);
+        if (!Double.isFinite(pitch) || pitch < 0.5 || pitch > 2.0) {
+            getLogger().warning(
+                    "flight-sound.pitch must be between 0.5 and 2.0; using 0.6"
+            );
+            pitch = 0.6;
+        }
+        flightSoundPitch = (float) pitch;
     }
 
     public boolean isEnabledFor(UUID uuid) {
@@ -126,9 +161,9 @@ public class BeaconFlyPlugin extends JavaPlugin {
                 : "§dFlight mode disabled");
         player.playSound(
                 player.getLocation(),
-                Sound.BLOCK_NOTE_BLOCK_CHIME,
+            flightSound,
                 1.0f,
-                0.6f
+            flightSoundPitch
         );
     }
 

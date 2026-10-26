@@ -2,7 +2,8 @@
 
 ## 1.3-rc1
 
-- Added the amethyst block placement sound when flight is granted or removed.
+- Added a sound when flight is granted or removed.
+- Made the flight sound and pitch configurable.
 
 ## 1.2
 
