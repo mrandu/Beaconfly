@@ -22,7 +22,8 @@ public class BeaconFlyPlugin extends JavaPlugin {
 
     private final Set<UUID> disabledPlayers = new HashSet<>();
     private final Set<UUID> flightEnabled = new HashSet<>();
-    private Sound flightSound = Sound.BLOCK_NOTE_BLOCK_CHIME;
+    private Sound flightSound = Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
+    private float flightSoundVolume = 0.5f;
     private float flightSoundPitch = 0.6f;
     private File playerPreferencesFile;
     private YamlConfiguration playerPreferences;
@@ -64,7 +65,7 @@ public class BeaconFlyPlugin extends JavaPlugin {
     private void loadSoundSettings() {
         String soundName = getConfig().getString(
                 "flight-sound.sound",
-            "minecraft:block.note_block.chime"
+                "minecraft:entity.experience_orb.pickup"
         );
         NamespacedKey soundKey = NamespacedKey.fromString(soundName.trim());
         Sound configuredSound = soundKey == null
@@ -73,12 +74,21 @@ public class BeaconFlyPlugin extends JavaPlugin {
         if (configuredSound == null) {
             getLogger().warning(
                     "Invalid flight-sound.sound '" + soundName
-                    + "'; using minecraft:block.note_block.chime"
+                            + "'; using minecraft:entity.experience_orb.pickup"
             );
-            flightSound = Sound.BLOCK_NOTE_BLOCK_CHIME;
+            flightSound = Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
         } else {
             flightSound = configuredSound;
         }
+
+        double volume = getConfig().getDouble("flight-sound.volume", 0.5);
+        if (!Double.isFinite(volume) || volume < 0.0 || volume > 1.0) {
+            getLogger().warning(
+                    "flight-sound.volume must be between 0.0 and 1.0; using 0.5"
+            );
+            volume = 0.5;
+        }
+        flightSoundVolume = (float) volume;
 
         double pitch = getConfig().getDouble("flight-sound.pitch", 0.6);
         if (!Double.isFinite(pitch) || pitch < 0.5 || pitch > 2.0) {
@@ -202,7 +212,7 @@ public class BeaconFlyPlugin extends JavaPlugin {
             player.playSound(
                     player.getLocation(),
                     flightSound,
-                    1.0f,
+                    flightSoundVolume,
                     flightSoundPitch
             );
         }

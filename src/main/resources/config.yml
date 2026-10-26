@@ -1,3 +1,4 @@
 flight-sound:
-  sound: minecraft:block.note_block.chime
+  sound: minecraft:entity.experience_orb.pickup
+  volume: 0.5
   pitch: 0.6

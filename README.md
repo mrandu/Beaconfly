@@ -31,11 +31,12 @@ The generated `plugins/BeaconFly/config.yml` controls the flight sound:
 
 ```yaml
 flight-sound:
-  sound: minecraft:block.note_block.chime
+  sound: minecraft:entity.experience_orb.pickup
+  volume: 0.5
   pitch: 0.6
 ```
 
-`sound` is a namespaced Minecraft sound key, and `pitch` must be between `0.5` and `2.0`. Invalid values fall back to the defaults. Run `/beaconfly reload` as an operator, or from the console, to apply changes without restarting the server.
+`sound` is a namespaced Minecraft sound key, `volume` must be between `0.0` and `1.0`, and `pitch` must be between `0.5` and `2.0`. Invalid values fall back to the defaults. Run `/beaconfly reload` as an operator, or from the console, to apply changes without restarting the server.
 
 ## Build
 

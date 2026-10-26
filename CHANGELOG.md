@@ -2,8 +2,8 @@
 
 ## 1.3-rc1
 
-- Added a sound when flight is granted or removed.
-- Made the flight sound and pitch configurable.
+- Set the default flight sound to experience-orb pickup at half volume.
+- Made the flight sound, volume, and pitch configurable.
 - Added an operator-only `/beaconfly reload` command for applying config changes.
 - Added persistent per-player sound controls with `/beaconfly sound on|off`.
 
