@@ -10,7 +10,7 @@ BeaconFly is a Paper server plugin that lets players fly while they have Haste I
 ## Install
 
 1. Build the project with `./mvnw.cmd clean package` on Windows, or `./mvnw clean package` on macOS/Linux.
-2. Copy `target/beaconfly-1.2.jar` into the server's `plugins` directory.
+2. Copy `target/beaconfly-1.3-rc1.jar` into the server's `plugins` directory.
 3. Start or restart the server.
 
 ## Usage
@@ -21,7 +21,7 @@ BeaconFly is a Paper server plugin that lets players fly while they have Haste I
 
 Only players can use these commands. There is no permission restriction, so any player can change their own setting. Player opt-outs are kept in memory and reset when the plugin or server restarts; BeaconFly is enabled by default.
 
-Flight eligibility is checked every five seconds. Creative and Spectator players are left unchanged. Flight state changes are announced in chat.
+Flight eligibility is checked every five seconds. Creative and Spectator players are left unchanged. Flight state changes are announced in chat and play the amethyst block placement sound.
 
 ## Build
 

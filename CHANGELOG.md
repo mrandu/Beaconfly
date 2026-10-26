@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3-rc1
+
+- Added the amethyst block placement sound when flight is granted or removed.
+
 ## 1.2
 
 - Added the `/beaconfly`, `/beaconfly on`, and `/beaconfly off` commands.

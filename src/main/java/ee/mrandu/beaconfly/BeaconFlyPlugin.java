@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -64,8 +65,17 @@ public class BeaconFlyPlugin extends JavaPlugin {
         return flightEnabled;
     }
 
-    public void clearFlightEnabled(UUID uuid) {
-        flightEnabled.remove(uuid);
+    public void disableFlight(Player player) {
+        UUID uuid = player.getUniqueId();
+        if (player.getGameMode() == GameMode.CREATIVE
+                || player.getGameMode() == GameMode.SPECTATOR) {
+            flightEnabled.remove(uuid);
+            return;
+        }
+
+        player.setFlying(false);
+        player.setAllowFlight(false);
+        updateFlightState(player, false);
     }
 
     private void checkPlayers() {
@@ -92,38 +102,36 @@ public class BeaconFlyPlugin extends JavaPlugin {
             if (shouldFly) {
 
                 player.setAllowFlight(true);
-
-                if (!flightEnabled.contains(
-                        player.getUniqueId())) {
-
-                    player.sendMessage(
-                            "§dFlight mode enabled"
-                    );
-
-                    flightEnabled.add(
-                            player.getUniqueId()
-                    );
-                }
+                updateFlightState(player, true);
 
             } else {
 
                 player.setFlying(false);
                 player.setAllowFlight(false);
-
-                if (flightEnabled.contains(
-                        player.getUniqueId())) {
-
-                    player.sendMessage(
-                            "§dFlight mode disabled"
-                    );
-
-                    flightEnabled.remove(
-                            player.getUniqueId()
-                    );
-                }
+                updateFlightState(player, false);
             }
         }
     }
+
+    private void updateFlightState(Player player, boolean enabled) {
+        boolean changed = enabled
+                ? flightEnabled.add(player.getUniqueId())
+                : flightEnabled.remove(player.getUniqueId());
+        if (!changed) {
+            return;
+        }
+
+        player.sendMessage(enabled
+                ? "§dFlight mode enabled"
+                : "§dFlight mode disabled");
+        player.playSound(
+                player.getLocation(),
+                Sound.BLOCK_AMETHYST_BLOCK_PLACE,
+                1.0f,
+                1.0f
+        );
+    }
+
     private boolean hasHaste2(Player player) {
 
         PotionEffect effect =

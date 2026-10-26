@@ -1,6 +1,5 @@
 package ee.mrandu.beaconfly;
 
-import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -59,12 +58,7 @@ public class BeaconFlyCommand implements CommandExecutor {
                     false
             );
 
-                if (player.getGameMode() != GameMode.CREATIVE
-                    && player.getGameMode() != GameMode.SPECTATOR) {
-                player.setFlying(false);
-                player.setAllowFlight(false);
-            }
-            plugin.clearFlightEnabled(player.getUniqueId());
+            plugin.disableFlight(player);
 
             player.sendMessage("§dBeaconFly disabled");
 
