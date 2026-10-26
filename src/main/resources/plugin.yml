@@ -5,5 +5,15 @@ api-version: '1.21'
 
 commands:
   beaconfly:
-    description: Toggle beacon flight
-    usage: /beaconfly [on|off]
+    description: Toggle beacon flight or reload its configuration
+    usage: /beaconfly [on|off|reload]
+    permission: beaconfly.use
+    permission-message: You do not have permission to use this command.
+
+permissions:
+  beaconfly.use:
+    description: Allows using the BeaconFly player commands.
+    default: true
+  beaconfly.reload:
+    description: Allows reloading the BeaconFly configuration.
+    default: op

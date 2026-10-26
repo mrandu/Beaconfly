@@ -83,6 +83,11 @@ public class BeaconFlyPlugin extends JavaPlugin {
         flightSoundPitch = (float) pitch;
     }
 
+    public void reloadSettings() {
+        reloadConfig();
+        loadSoundSettings();
+    }
+
     public boolean isEnabledFor(UUID uuid) {
         return !disabledPlayers.contains(uuid);
     }

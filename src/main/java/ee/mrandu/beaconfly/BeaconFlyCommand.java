@@ -20,6 +20,17 @@ public class BeaconFlyCommand implements CommandExecutor {
             String label,
             String[] args) {
 
+        if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
+            if (!sender.hasPermission("beaconfly.reload")) {
+                sender.sendMessage("You do not have permission to reload BeaconFly.");
+                return true;
+            }
+
+            plugin.reloadSettings();
+            sender.sendMessage("BeaconFly configuration reloaded.");
+            return true;
+        }
+
         if (!(sender instanceof Player player)) {
             sender.sendMessage("Players only.");
             return true;
@@ -65,7 +76,7 @@ public class BeaconFlyCommand implements CommandExecutor {
             return true;
         }
 
-        player.sendMessage("§dUsage: /beaconfly [on|off]");
+        player.sendMessage("§dUsage: /beaconfly [on|off|reload]");
         return true;
     }
 }

@@ -18,8 +18,9 @@ BeaconFly is a Paper server plugin that lets players fly while they have Haste I
 - `/beaconfly` displays the plugin version and whether flight is enabled for you.
 - `/beaconfly on` enables BeaconFly for you.
 - `/beaconfly off` disables BeaconFly for you.
+- `/beaconfly reload` reloads sound settings (console or operators with `beaconfly.reload`).
 
-Only players can use these commands. There is no permission restriction, so any player can change their own setting. Player opt-outs are kept in memory and reset when the plugin or server restarts; BeaconFly is enabled by default.
+The status, `on`, and `off` commands are player-only and available to everyone by default. The `reload` command works from the console and requires the `beaconfly.reload` permission, granted to operators by default. Player opt-outs are kept in memory and reset when the plugin or server restarts; BeaconFly is enabled by default.
 
 Flight eligibility is checked every five seconds. Creative and Spectator players are left unchanged. Flight state changes are announced in chat and play the configured sound.
 
@@ -33,7 +34,7 @@ flight-sound:
 	pitch: 0.6
 ```
 
-`sound` is a namespaced Minecraft sound key, and `pitch` must be between `0.5` and `2.0`. Invalid values fall back to the defaults. Restart or reload the plugin after editing the config.
+`sound` is a namespaced Minecraft sound key, and `pitch` must be between `0.5` and `2.0`. Invalid values fall back to the defaults. Run `/beaconfly reload` as an operator, or from the console, to apply changes without restarting the server.
 
 ## Build
 

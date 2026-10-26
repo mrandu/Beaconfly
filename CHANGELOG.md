@@ -4,6 +4,7 @@
 
 - Added a sound when flight is granted or removed.
 - Made the flight sound and pitch configurable.
+- Added an operator-only `/beaconfly reload` command for applying config changes.
 
 ## 1.2
 
