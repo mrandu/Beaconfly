@@ -32,3 +32,7 @@ Calling `javac` directly also requires the Paper API and its dependencies on the
 ## Version history
 
 See [CHANGELOG.md](CHANGELOG.md).
+
+## License
+
+BeaconFly is licensed under the GNU General Public License v3.0 or any later version (GPL-3.0-or-later). See [LICENSE](LICENSE).
