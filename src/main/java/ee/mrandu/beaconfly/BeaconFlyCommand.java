@@ -50,6 +50,23 @@ public class BeaconFlyCommand implements CommandExecutor {
             return true;
         }
 
+        if (args[0].equalsIgnoreCase("sound")) {
+            if (args.length != 2
+                    || (!args[1].equalsIgnoreCase("on")
+                    && !args[1].equalsIgnoreCase("off"))) {
+                player.sendMessage("§dUsage: /beaconfly sound [on|off]");
+                return true;
+            }
+
+            boolean enabled = args[1].equalsIgnoreCase("on");
+            if (plugin.setSoundEnabledFor(player.getUniqueId(), enabled)) {
+                player.sendMessage("§dFlight sound " + (enabled ? "enabled" : "disabled"));
+            } else {
+                player.sendMessage("§cCould not save your sound preference.");
+            }
+            return true;
+        }
+
         if (args[0].equalsIgnoreCase("on")) {
 
             plugin.setEnabledFor(
@@ -76,7 +93,7 @@ public class BeaconFlyCommand implements CommandExecutor {
             return true;
         }
 
-        player.sendMessage("§dUsage: /beaconfly [on|off|reload]");
+        player.sendMessage("§dUsage: /beaconfly [on|off|sound <on|off>|reload]");
         return true;
     }
 }
