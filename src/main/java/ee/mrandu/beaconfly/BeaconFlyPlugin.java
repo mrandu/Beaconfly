@@ -128,7 +128,7 @@ public class BeaconFlyPlugin extends JavaPlugin {
                 player.getLocation(),
                 Sound.BLOCK_AMETHYST_BLOCK_PLACE,
                 1.0f,
-                1.0f
+                0.6f
         );
     }
 
