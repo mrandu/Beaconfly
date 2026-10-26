@@ -1,0 +1,9 @@
+name: BeaconFly
+version: '1.2'
+main: ee.mrandu.beaconfly.BeaconFlyPlugin
+api-version: '1.21'
+
+commands:
+  beaconfly:
+    description: Toggle beacon flight
+    usage: /beaconfly [on|off]
