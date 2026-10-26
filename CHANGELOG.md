@@ -1,11 +1,10 @@
 # Changelog
 
-## 1.3-rc1
+## 1.3
 
-- Set the default flight sound to experience-orb pickup at half volume.
-- Made the flight sound, volume, and pitch configurable.
-- Added an operator-only `/beaconfly reload` command for applying config changes.
-- Added persistent per-player sound controls with `/beaconfly sound on|off`.
+- Added configurable flight sounds for flight activation and deactivation, defaulting to the experience-orb pickup sound at half volume.
+- Added per-player `/beaconfly sound on|off` controls, with preferences saved across restarts.
+- Added the operator-only `/beaconfly reload` command to apply sound configuration changes without restarting the server.
 
 ## 1.2
 
